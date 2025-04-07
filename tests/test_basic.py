@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from pyyoga import YogaNode, __version__
+from pyyoga import YogaNode, __version__, FlexDirection
 
 
 def test_layout():
     node = YogaNode()
     node.set_width(100)
     node.set_height(100)
+    node.set_flex_direction(FlexDirection.ROW)
     node.calculate_layout()
     (left, top, wdith, height) = node.get_layout()
 
