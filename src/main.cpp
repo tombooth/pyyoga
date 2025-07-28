@@ -84,6 +84,18 @@ public:
         return std::make_shared<YogaNode>(childNode);
     }
 
+    void set_flex_wrap(const char *name)
+    {
+        if (strcmp(name, "nowrap") == 0)
+            YGNodeStyleSetFlexWrap(node, YGWrapNoWrap);
+        else if (strcmp(name, "wrap") == 0)
+            YGNodeStyleSetFlexWrap(node, YGWrapWrap);
+        else if (strcmp(name, "wrap-reverse") == 0)
+            YGNodeStyleSetFlexWrap(node, YGWrapWrapReverse);
+        else
+            throw std::invalid_argument("Invalid flex wrap: " + std::string(name) + ". Expected 'nowrap', 'wrap', or 'wrap-reverse'.");
+    }
+
     void set_flex_direction(const char *name)
     {
         if (strcmp(name, "column") == 0)
@@ -268,6 +280,7 @@ PYBIND11_MODULE(_core, m)
         .def("get_child_count", &YogaNode::get_child_count)
         .def("get_child", &YogaNode::get_child)
         .def("set_flex_direction", &YogaNode::set_flex_direction)
+        .def("set_flex_wrap", &YogaNode::set_flex_wrap)
         .def("set_justify_content", &YogaNode::set_justify_content)
         .def("set_align_items", &YogaNode::set_align_items)
         .def("set_align_self", &YogaNode::set_align_self)

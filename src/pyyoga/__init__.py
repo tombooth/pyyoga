@@ -23,6 +23,23 @@ class FlexDirection(str, Enum):
                 f"Invalid FlexDirection: {value}. Expected one of {list(FlexDirection)}"
             )
 
+class FlexWrap(str, Enum):
+    NOWRAP = "nowrap"
+    WRAP = "wrap"
+    WRAP_REVERSE = "wrap-reverse"
+
+    @staticmethod
+    def parse(value: Optional[str]) -> Optional[FlexWrap]:
+        if value is None:
+            return None
+
+        try:
+            return FlexWrap(value)
+        except ValueError:
+            raise ValueError(
+                f"Invalid FlexWrap: {value}. Expected one of {list(FlexWrap)}"
+            )
+
 
 class Edge(str, Enum):
     LEFT = "left"
